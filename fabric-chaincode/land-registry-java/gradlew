@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+set -eu
+
+if [ "${1:-}" != "installDist" ]; then
+  echo "This project uses Maven. Supported compatibility command: ./gradlew installDist" >&2
+  exit 1
+fi
+
+PROJECT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+APP_NAME="landregistry"
+JAR_NAME="land-registry-chaincode-1.0.0.jar"
+
+cd "$PROJECT_DIR"
+
+if [ ! -f "target/$JAR_NAME" ]; then
+  echo "Missing target/$JAR_NAME." >&2
+  echo "Run this first from PowerShell: mvn clean package -DskipTests" >&2
+  exit 1
+fi
+
+rm -rf "build/install/$APP_NAME"
+mkdir -p "build/install/$APP_NAME/bin" "build/install/$APP_NAME/lib"
+cp "target/$JAR_NAME" "build/install/$APP_NAME/lib/$JAR_NAME"
+
+cat > "build/install/$APP_NAME/bin/$APP_NAME" <<EOF
+#!/usr/bin/env sh
+APP_HOME=\$(CDPATH= cd -- "\$(dirname -- "\$0")/.." && pwd)
+exec java -jar "\$APP_HOME/lib/$JAR_NAME" "\$@"
+EOF
+
+chmod +x "build/install/$APP_NAME/bin/$APP_NAME"

@@ -1,5 +1,6 @@
 # Build outputs
 target/
+build/
 dist/
 dist-ssr/
 node_modules/
@@ -31,6 +32,7 @@ connection-profile*.json
 wallet/
 
 # Local helper files
+.fabric-tools/
 temp-settings.xml
 fabric-start-temp.sh
 Land-Registry-Backend/package-lock.json

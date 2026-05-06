@@ -5,7 +5,7 @@ This project is prepared for a two-service Render deployment:
 - `land-registry-backend` as a Docker-based web service
 - `land-registry-frontend` as a static site
 
-The blueprint file is at [render.yaml](/c:/Users/janan/Spring/FinalYearProject/render.yaml:1).
+The blueprint file is at [render.yaml](render.yaml).
 
 ## 1. Push the repo
 
@@ -47,7 +47,7 @@ For the backend:
 
 Example file:
 
-- [env.render.example](/c:/Users/janan/Spring/FinalYearProject/Land-Registry-Backend/env.render.example:1)
+- [env.render.example](Land-Registry-Backend/env.render.example)
 
 For the frontend:
 
@@ -55,11 +55,11 @@ For the frontend:
 
 Example file:
 
-- [env.render.example](/c:/Users/janan/Spring/FinalYearProject/Land-Registry-Frontend/env.render.example:1)
+- [env.render.example](Land-Registry-Frontend/env.render.example)
 
 `JWT_SECRET` is generated automatically by Render from the blueprint.
 
-The backend uses [Dockerfile](/c:/Users/janan/Spring/FinalYearProject/Land-Registry-Backend/Dockerfile:1) because Render's current native runtimes do not include Java.
+The backend uses [Dockerfile](Land-Registry-Backend/Dockerfile).
 
 ## 5. First deploy order
 
