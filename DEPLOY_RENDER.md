@@ -21,7 +21,7 @@ Example:
 mongodb+srv://<username>:<password>@<cluster>/<db>?retryWrites=true&w=majority
 ```
 
-Use that value for `MONGODB_URI`.
+Use that value for `SPRING_DATA_MONGODB_URI`.
 
 ## 3. Create services in Render
 
@@ -41,7 +41,7 @@ This creates:
 
 For the backend:
 
-- `MONGODB_URI` = your MongoDB Atlas URI
+- `SPRING_DATA_MONGODB_URI` = your MongoDB Atlas URI
 - `CORS_ALLOWED_ORIGINS` = your frontend URL after Render creates it
 - `FABRIC_ENABLED` = `false` for the first deployment
 
