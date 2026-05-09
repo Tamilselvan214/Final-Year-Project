@@ -24,37 +24,36 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getServletPath();
+        return path != null && path.startsWith("/api/auth/");
+    }
+
+    @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        
         final String authHeader = request.getHeader("Authorization");
-        String username = null;
-        String jwt = null;
 
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            jwt = authHeader.substring(7);
+        if (authHeader != null && authHeader.startsWith("Bearer ")
+                && SecurityContextHolder.getContext().getAuthentication() == null) {
+            String jwt = authHeader.substring(7);
             try {
-                username = jwtUtil.extractUsername(jwt);
-            } catch (Exception e) {
-                logger.error("Error extracting username from token", e);
-            }
-        }
+                String username = jwtUtil.extractUsername(jwt);
+                String role = jwtUtil.extractRole(jwt);
 
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            String role = jwtUtil.extractRole(jwt);
-            
-            // Simple UserDetails creation without DB lookup for performance (stateless)
-            // In a real app, you might want to load from DB to check if user is locked
-            UserDetails userDetails = User.withUsername(username)
-                    .password("") // Password not needed for token auth
-                    .roles(role)
-                    .build();
+                if (username != null && jwtUtil.validateToken(jwt, username)) {
+                    UserDetails userDetails = User.withUsername(username)
+                            .password("")
+                            .roles(role)
+                            .build();
 
-            if (jwtUtil.validateToken(jwt, username)) {
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities());
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authToken);
+                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                            userDetails, null, userDetails.getAuthorities());
+                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(authToken);
+                }
+            } catch (Exception exception) {
+                logger.warn("Ignoring invalid JWT for request {}", request.getRequestURI(), exception);
             }
         }
         filterChain.doFilter(request, response);
