@@ -28,7 +28,7 @@ public class SecurityConfig {
 
     public SecurityConfig(
             JwtAuthenticationFilter jwtAuthFilter,
-            @Value("${app.cors.allowed-origins:https://final-year-project-bgjm.onrender.com}") String allowedOrigins
+            @Value("${app.cors.allowed-origins:https://land-registry-frontend-jfbt.onrender.com}") String allowedOrigins
     ) {
         this.jwtAuthFilter = jwtAuthFilter;
         this.allowedOrigins = Arrays.stream(allowedOrigins.split(","))
@@ -71,7 +71,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(allowedOrigins));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Accept", "Origin"));
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

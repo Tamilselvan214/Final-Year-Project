@@ -12,7 +12,7 @@ services:
       - key: JWT_SECRET
         generateValue: true
       - key: CORS_ALLOWED_ORIGINS
-        value: https://final-year-project-bgjm.onrender.com
+        value: https://land-registry-frontend-jfbt.onrender.com
       - key: FABRIC_ENABLED
         value: "false"
 
