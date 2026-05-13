@@ -58,53 +58,59 @@ const Login = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-gray-50 text-gray-900">
-            <main className="mx-auto grid min-h-screen w-full max-w-6xl grid-cols-1 lg:grid-cols-[0.9fr_1fr]">
-                <section className="hidden border-r border-gray-200 bg-white px-10 py-12 lg:flex lg:flex-col lg:justify-between">
+        <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,_#dbeafe,_transparent_32%),linear-gradient(135deg,_#f8fafc_0%,_#eff6ff_45%,_#ecfdf5_100%)] text-gray-900">
+            <main className="mx-auto grid min-h-screen w-full max-w-6xl grid-cols-1 p-4 sm:p-6 lg:grid-cols-[0.95fr_1fr] lg:p-8">
+                <section className="relative hidden overflow-hidden rounded-l-2xl bg-gradient-to-br from-blue-950 via-blue-800 to-emerald-700 px-10 py-12 text-white shadow-2xl lg:flex lg:flex-col lg:justify-between">
+                    <div className="absolute inset-x-0 top-0 h-40 bg-white/10"></div>
+                    <div className="absolute -right-20 bottom-20 h-56 w-56 rounded-full bg-cyan-300/20 blur-3xl"></div>
+                    <div className="absolute left-12 top-36 h-28 w-28 rounded-full bg-emerald-300/20 blur-2xl"></div>
+
                     <div>
-                        <div className="flex items-center gap-3">
-                            <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-600 text-white shadow-sm">
+                        <div className="relative flex items-center gap-3">
+                            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/15 text-white shadow-sm ring-1 ring-white/25">
                                 <Shield className="h-6 w-6" />
                             </div>
                             <div>
-                                <h1 className="text-2xl font-bold text-blue-950">LandRegistry</h1>
-                                <p className="text-sm text-gray-500">Secure land records portal</p>
+                                <h1 className="text-2xl font-bold">LandRegistry</h1>
+                                <p className="text-sm text-blue-100">Secure land records portal</p>
                             </div>
                         </div>
 
-                        <div className="mt-16 space-y-5">
-                            <p className="text-sm font-semibold uppercase tracking-widest text-blue-600">Blockchain verified</p>
-                            <h2 className="max-w-sm text-4xl font-bold leading-tight text-gray-950">
+                        <div className="relative mt-16 space-y-5">
+                            <p className="inline-flex rounded-full bg-white/12 px-3 py-1 text-sm font-semibold uppercase tracking-widest text-cyan-100 ring-1 ring-white/20">
+                                Blockchain verified
+                            </p>
+                            <h2 className="max-w-md text-4xl font-bold leading-tight">
                                 Access trusted property records with the right role.
                             </h2>
-                            <p className="max-w-md text-base leading-7 text-gray-600">
+                            <p className="max-w-md text-base leading-7 text-blue-50">
                                 Sign in as a public user, owner, or administrator to search records, manage property submissions, and verify land transfers.
                             </p>
                         </div>
                     </div>
 
-                    <div className="grid gap-3">
+                    <div className="relative grid gap-3">
                         {[
                             ['Immutable audit trail', 'Every land update keeps a clear verification history.'],
                             ['Role-aware dashboard', 'Each user sees only the workflows relevant to them.'],
                             ['Transfer oversight', 'Admins can review pending ownership changes.'],
                         ].map(([title, description]) => (
-                            <div key={title} className="flex gap-3 rounded-lg border border-gray-200 bg-gray-50 p-4">
-                                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-emerald-600" />
+                            <div key={title} className="flex gap-3 rounded-xl border border-white/15 bg-white/10 p-4 shadow-sm backdrop-blur">
+                                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-emerald-200" />
                                 <div>
-                                    <p className="font-semibold text-gray-900">{title}</p>
-                                    <p className="mt-1 text-sm text-gray-500">{description}</p>
+                                    <p className="font-semibold text-white">{title}</p>
+                                    <p className="mt-1 text-sm text-blue-50/85">{description}</p>
                                 </div>
                             </div>
                         ))}
                     </div>
                 </section>
 
-                <section className="flex items-center justify-center px-4 py-8 sm:px-6 lg:px-10">
-                    <div className="w-full max-w-md rounded-lg border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
+                <section className="flex items-center justify-center rounded-2xl bg-white/80 px-4 py-8 shadow-xl ring-1 ring-white/70 backdrop-blur sm:px-6 lg:rounded-l-none lg:px-10">
+                    <div className="w-full max-w-md rounded-2xl border border-gray-200/80 bg-white p-6 shadow-[0_24px_80px_rgba(15,23,42,0.14)] sm:p-8">
                         <div className="mb-8">
                             <div className="mb-5 flex items-center gap-3 lg:hidden">
-                                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 text-white">
+                                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white">
                                     <Shield className="h-5 w-5" />
                                 </div>
                                 <div>
@@ -112,7 +118,7 @@ const Login = () => {
                                     <p className="text-xs text-gray-500">Secure land records portal</p>
                                 </div>
                             </div>
-                            <p className="text-sm font-semibold uppercase tracking-widest text-blue-600">
+                            <p className="text-sm font-semibold uppercase tracking-widest text-emerald-600">
                                 {isRegistering ? 'Create account' : 'Welcome back'}
                             </p>
                             <h2 className="mt-2 text-2xl font-bold text-gray-950">
@@ -141,13 +147,15 @@ const Login = () => {
                                                 key={option.value}
                                                 type="button"
                                                 onClick={() => setRole(option.value)}
-                                                className={`rounded-lg border p-3 text-left transition-colors ${role === option.value
-                                                    ? 'border-blue-600 bg-blue-50 text-blue-700 shadow-sm'
-                                                    : 'border-gray-200 bg-white text-gray-600 hover:border-blue-200 hover:bg-gray-50'
-                                                    }`}
-                                                aria-pressed={role === option.value}
-                                            >
-                                                <RoleIcon className="mb-2 h-4 w-4" />
+                                            className={`rounded-xl border p-3 text-left transition-all ${role === option.value
+                                                ? 'border-blue-600 bg-gradient-to-br from-blue-50 to-emerald-50 text-blue-800 shadow-sm ring-2 ring-blue-100'
+                                                : 'border-gray-200 bg-white text-gray-600 hover:-translate-y-0.5 hover:border-blue-200 hover:bg-gray-50 hover:shadow-sm'
+                                                }`}
+                                            aria-pressed={role === option.value}
+                                        >
+                                                <span className={`mb-2 flex h-8 w-8 items-center justify-center rounded-lg ${role === option.value ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-500'}`}>
+                                                    <RoleIcon className="h-4 w-4" />
+                                                </span>
                                                 <span className="block text-sm font-semibold">{option.label}</span>
                                                 <span className="mt-1 block text-xs text-gray-500">{option.helper}</span>
                                             </button>
@@ -168,7 +176,7 @@ const Login = () => {
                                                 placeholder="Enter your name"
                                                 value={name}
                                                 onChange={(e) => setName(e.target.value)}
-                                                className="w-full rounded-lg border border-gray-300 bg-white py-3 pl-10 pr-4 text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
+                                                className="w-full rounded-xl border border-gray-300 bg-white py-3 pl-10 pr-4 text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
                                             />
                                         </div>
                                     </div>
@@ -184,7 +192,7 @@ const Login = () => {
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
                                             required
-                                            className="w-full rounded-lg border border-gray-300 bg-white py-3 pl-10 pr-4 text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
+                                            className="w-full rounded-xl border border-gray-300 bg-white py-3 pl-10 pr-4 text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
                                         />
                                     </div>
                                 </div>
@@ -199,7 +207,7 @@ const Login = () => {
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)}
                                             required
-                                            className="w-full rounded-lg border border-gray-300 bg-white py-3 pl-10 pr-4 text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
+                                            className="w-full rounded-xl border border-gray-300 bg-white py-3 pl-10 pr-4 text-gray-900 outline-none transition-colors placeholder:text-gray-400 focus:border-blue-600 focus:ring-4 focus:ring-blue-100"
                                         />
                                     </div>
                                 </div>
@@ -208,7 +216,7 @@ const Login = () => {
                             <button
                                 type="submit"
                                 disabled={isLoading}
-                                className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-3 font-semibold text-white shadow-sm transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300"
+                                className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-700 via-blue-600 to-emerald-600 px-4 py-3 font-semibold text-white shadow-lg shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-blue-600/25 disabled:cursor-not-allowed disabled:translate-y-0 disabled:from-blue-300 disabled:to-emerald-300"
                             >
                                 {isLoading ? <Loader className="h-5 w-5 animate-spin" /> : <>{isRegistering ? 'Create account' : 'Sign in'} <ArrowRight className="h-5 w-5" /></>}
                             </button>
